@@ -16,15 +16,28 @@ assessmentButton.addEventListener(
         if (resultDivision.firstChild) {
             resultDivision.removeChild(resultDivision.firstChild)
         }
+
         // 診断結果表示エリアの作成
-        resultDivision.innerText = '';       //シンプル
-        const header = document.createElement('h3');    //h3タグの作成
-        header.innerText = '診断結果';                   //h3タグ内側のテキスト「診断結果」の設定
-        resultDivision.appendChild(header);             //divタグの子要素として追加
-        const paragraph = document.createElement('p');  //pタグの作成
-        const result = assessment(userName);            //診断結果の作成
-        paragraph.innerText = result;                   //pタグの内側のテキストを設定
-        resultDivision.appendChild(paragraph);          //divタグの子要素として追加
+        const headerDivision = document.createElement('div');
+        headerDivision.setAttribute('class', 'card-header text-bg-primary');
+        headerDivision.innerText = '診断結果';
+
+        //bodyDivision 作成
+        const bodyDivision = document.createElement('div');
+        bodyDivision.setAttribute('class', 'card-body');
+
+        const paragraph = document.createElement('p');
+        paragraph.setAttribute('class', 'card-text');
+        const result = assessment(userName);
+        paragraph.innerText = result;
+        bodyDivision.appendChild(paragraph);
+
+        //resultDivisionにBootstrapのスタイルを適用
+        resultDivision.setAttribute('class', 'card');
+
+        //headerDivisionとbodyDivisionをresultDivisionに差し込む
+        resultDivision.appendChild(headerDivision);
+        resultDivision.appendChild(bodyDivision)
         //ツイートエリアの作成
         tweetDivision.innerText = '';                   //診断ボタンを押すとツイートエリアの文字が消える
         const anchor = document.createElement('a');
